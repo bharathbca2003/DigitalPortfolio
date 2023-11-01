@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electricity Bill Management System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Electricity Bill Management System</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="bills.html">Bills</a></li>
+        <li><a href="account.html">Account</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EB Bill Management System - Forms</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1></h1>
+    <nav>
+      <ul>
+        <li><a href="index.html"></a></li>
+        <li><a href="bills.html"></a></li>
+        <li><a href="account.html"></a></li>
+        <li><a href="contact.html"></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h2>Enter Customer Details</h2>
+    <form>
+      <div class="form-group">
+        <label for="customerName">Customer Name:</label>
+        <input type="text" id="customerName" name="customerName" required>
+      </div>
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+      </div>
+      <div class="form-group">
+        <label for="meterNumber">Meter Number:</label>
+        <input type="text" id="meterNumber" name="meterNumber" required>
+      </div>
+      <div class="form-group">
+        <label for="unitsConsumed">Units Consumed:</label>
+        <input type="number" id="unitsConsumed" name="unitsConsumed" required>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1></h1>
+    <form id="billForm" onsubmit="validateForm(event)">
+        <label for="consumerName">Consumer Name:</label>
+        <input type="text" id="consumerName" name="consumerName" required>
+        <span class="error-message" id="consumerNameError"></span>
+        <br><br>
+
+        <label for="meterNumber">Meter Number:</label>
+        <input type="text" id="meterNumber" name="meterNumber" required>
+        <span class="error-message" id="meterNumberError"></span>
+        <br><br>
+
+        <label for="unitsConsumed">Units Consumed:</label>
+        <input type="number" id="unitsConsumed" name="unitsConsumed" required>
+        <span class="error-message" id="unitsConsumedError"></span>
+        <br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+            let consumerName = document.getElementById('consumerName').value;
+            let meterNumber = document.getElementById('meterNumber').value;
+            let unitsConsumed = document.getElementById('unitsConsumed').value;
+
+            document.getElementById('consumerNameError').textContent = consumerName ? '' : 'Please enter the consumer name';
+            document.getElementById('meterNumberError').textContent = meterNumber ? '' : 'Please enter the meter number';
+            document.getElementById('unitsConsumedError').textContent = unitsConsumed ? '' : 'Please enter the units consumed';
+
+            if (consumerName && meterNumber && unitsConsumed) {
+                // If all fields are filled, you can proceed with form submission or further processing
+                alert('Form submitted successfully!');
+                document.getElementById('billForm').reset(); // Reset the form after submission
+            }
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Electricity Bill Management System</h1>
+    <form id="billForm" onsubmit="calculateBill(event)">
+        <label for="unitsConsumed">Units Consumed:</label>
+        <input type="number" id="unitsConsumed" name="unitsConsumed" required>
+        <span class="error-message" id="unitsConsumedError"></span>
+        <br><br>
+
+        <input type="submit" value="Calculate Bill">
+    </form>
+
+    <div id="billResult" style="display: none;">
+        <h2>Calculated Bill</h2>
+        <p id="calculatedBill"></p>
+    </div>
+
+    <script>
+        function calculateBill(event) {
+            event.preventDefault();
+            let unitsConsumed = parseFloat(document.getElementById('unitsConsumed').value);
+            const ratePerUnit = 5.5; // Sample rate per unit (you can change this as required)
+
+            if (isNaN(unitsConsumed) || unitsConsumed <= 0) {
+                document.getElementById('unitsConsumedError').textContent = 'Please enter a valid number of units consumed';
+                document.getElementById('billResult').style.display = 'none';
+            } else {
+                document.getElementById('unitsConsumedError').textContent = '';
+                const billAmount = unitsConsumed * ratePerUnit;
+                document.getElementById('calculatedBill').textContent = `Total Bill Amount: $${billAmount.toFixed(2)}`;
+                document.getElementById('billResult').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electricity Bill Management System - Billing History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #c08888;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #a0072a;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .billing-history {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .billing-entry {
+            background: #018ca5;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .billing-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date {
+            font-weight: bold;
+        }
+
+        .amount {
+            color: rgb(251, 255, 18);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Billing History</h1>
+        <div class="billing-history">
+            <div class="billing-entry">
+                <div class="billing-details">
+                    <span class="date">Date: 2023-10-01</span>
+                    <span class="amount">$120.50</span>
+                </div>
+                <p>Units Consumed: 80</p>
+            </div>
+
+            <div class="billing-entry">
+                <div class="billing-details">
+                    <span class="date">Date: 2023-09-01</span>
+                    <span class="amount">$110.20</span>
+                </div>
+                <p>Units Consumed: 75</p>
+            </div>
+
+            <!-- More billing entries can be added here -->
+        </div>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electricity Bill Management System - Reports & Analytics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .report-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .report-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .chart {
+            width: 100%;
+            height: 200px;
+            background: #0a73fd;
+            border-radius: 5px;
+            /* Placeholder for a chart/graph */
+        }
+
+        .analytics-details {
+            margin-top: 10px;
+        }
+
+        .detail-item {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Reports & Analytics</h1>
+        
+        <div class="report-card">
+            <div class="report-title">Monthly Usage</div>
+            <div class="chart"></div>
+            <div class="analytics-details">
+                <div class="detail-item">Average Consumption: 85 units</div>
+                <div class="detail-item">Peak Usage: 120 units</div>
+                <!-- Additional details can be added here -->
+            </div>
+        </div>
+
+        <div class="report-card">
+            <div class="report-title">Yearly Comparison</div>
+            <div class="chart"></div>
+            <div class="analytics-details">
+                <div class="detail-item">2023 - Total Consumption: 950 units</div>
+                <div class="detail-item">2022 - Total Consumption: 920 units</div>
+                <!-- Additional details can be added here -->
+            </div>
+        </div>
+
+        <!-- More report cards can be added here -->
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electricity Bill Management System - Testing</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Electricity Bill Management System - Testing</h1>
+    </header>
+    <main>
+        <section class="test-cases">
+            <h2>Test Cases</h2>
+            <ul>
+                <li>Test Case 1: Input validation for consumer name</li>
+                <li>Test Case 2: Input validation for units consumed</li>
+                <li>Test Case 3: Calculating the bill based on different unit rates</li>
+                <li>Test Case 4: Checking billing history display</li>
+                <li>Test Case 5: Reports & Analytics data accuracy</li>
+                <!-- Add more test cases as needed -->
+            </ul>
+        </section>
+        <section class="test-results">
+            <h2>Test Results</h2>
+            <div class="test-result-item">
+                <p>Test Case 1: Passed</p>
+                <p>Test Case 2: Passed</p>
+                <p>Test Case 3: Passed</p>
+                <p>Test Case 4: Passed</p>
+                <p>Test Case 5: Failed</p>
+                <!-- Add test results as per testing outcomes -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Electricity Bill Management System</p>
+    </footer>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Electricity Bill Management System - Documentation</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Electricity Bill Management System - Documentation</h1>
+    </header>
+    <main>
+        <section class="documentation">
+            <h2>Introduction</h2>
+            <p>
+                This documentation provides an overview of the Electricity Bill Management System. It includes the system's
+                purpose, features, and user guide.
+            </p>
+        </section>
+        <section class="features">
+            <h2>Features</h2>
+            <ul>
+                <li>User Registration</li>
+                <li>Bill Calculation</li>
+                <li>Billing History</li>
+                <li>Reports & Analytics</li>
+                <!-- Add more features -->
+            </ul>
+        </section>
+        <section class="user-guide">
+            <h2>User Guide</h2>
+            <p>
+                To use the system, follow these steps:
+            </p>
+            <ol>
+                <li>Register as a user</li>
+                <li>Input your electricity consumption data</li>
+                <li>View your billing history</li>
+                <li>Explore reports and analytics for consumption patterns</li>
+                <!-- Add more user guide instructions -->
+            </ol>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Electricity Bill Management System</p>
+    </footer>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Electricity Bill Management System - Deployment</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Electricity Bill Management System - Deployment</h1>
+    </header>
+    <main>
+        <section class="deployment-info">
+            <h2>Deployment Guide</h2>
+            <p>
+                This guide provides steps for deploying the Electricity Bill Management System to a server or hosting
+                environment.
+            </p>
+            <ol>
+                <li>Ensure the server meets the system requirements.</li>
+                <li>Download the latest version of the system.</li>
+                <li>Set up the database and configure connection settings.</li>
+                <li>Upload the system files to the server.</li>
+                <li>Configure necessary permissions and security settings.</li>
+                <li>Update configuration files with server-specific settings.</li>
+                <li>Perform testing after deployment to ensure proper functionality.</li>
+            </ol>
+        </section>
+        <section class="system-requirements">
+            <h2>System Requirements</h2>
+            <ul>
+                <li>Web server (e.g., Apache, Nginx)</li>
+                <li>Database system (e.g., MySQL, PostgreSQL)</li>
+                <li>Server with PHP support (if applicable)</li>
+                <!-- Add more specific system requirements -->
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Electricity Bill Management System</p>
+    </footer>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Electricity Bill Management System - Feedback & Improvement</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Electricity Bill Management System - Feedback & Improvement</h1>
+    </header>
+    <main>
+        <section class="feedback-form">
+            <h2>Provide Feedback</h2>
+            <form id="feedbackForm" action="submit-feedback.php" method="post">
+                <label for="feedback">Your Feedback:</label><br>
+                <textarea id="feedback" name="feedback" rows="4" cols="50" required></textarea><br><br>
+                <label for="email">Your Email (optional):</label><br>
+                <input type="email" id="email" name="email"><br><br>
+                <input type="submit" value="Submit Feedback">
+            </form>
+        </section>
+        <section class="improvements">
+            <h2>Suggested Improvements</h2>
+            <ul>
+                <li>Enhanced user interface for better user experience</li>
+                <li>Implement more detailed billing history filters</li>
+                <li>Introduce real-time usage tracking and notifications</li>
+                <!-- Add more suggested improvements -->
+            </ul>
+        </section>
+    
